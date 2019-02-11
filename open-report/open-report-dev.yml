@@ -1,0 +1,31 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: open-report
+  cloud:
+    consul:
+      host: 192.168.17.45
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        prefer-ip-address: true
+        instance-id: ${spring.application.name}-${spring.cloud.client.ipAddress}
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.16.127:3306/openvive?useUnicode=true&characterEncoding=gbk
+    username: root
+    password: ENC(Zj5ZPpoz0kBWBs7rRuQGYw==)
+    type: com.alibaba.druid.pool.DruidDataSource
+    initial-size: 5
+    min-idle: 10
+    max-active: 50
+    max-wait: 600000
+    validationgQuery: SELECT 'X'
+    timeBetweenEvictionRunsMillis: 60000
+  zipkin:
+    base-url: http://192.168.17.45:9411
+#jasypt加密的密匙
+jasypt:
+  encryptor:
+    password: openvivepassword
